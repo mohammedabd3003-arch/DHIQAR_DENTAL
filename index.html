@@ -2,15 +2,17 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>بسمة ذي قار</title>
 <meta name="description" content="دليل أطباء الأسنان في محافظة ذي قار — خارطة، حالات قبل وبعد، وحجز عبر واتساب">
-<meta name="theme-color" content="#0B2C3D">
+<meta name="theme-color" content="#06141E">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="بسمة">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
 <!-- الإعداد صار في ملف منفصل: config.js (رابط Supabase والمفتاح). إذا لم يوجد يعمل التطبيق تجريبياً -->
 <script src="config.js" onerror="void 0"></script>
@@ -20,14 +22,14 @@
    PICTURE: enamel molar standing on a faint gold ziggurat over lapis; the map, doctor grid and case gallery are the working pictures.
    COLOUR and TYPE: stone ivory ground, Sumerian lapis #0B2C3D dominant, Ur gold #C89B3C accent; Readex Pro titles, IBM Plex Sans Arabic body.
    LAYOUT: public = hero/search/grid/cases/tips + map page; doctor = status, tabs (profile/cases/stats/QR); admin = tiles + review queues. */
-:root{color-scheme:light dark;
---bg:light-dark(#FAF8F4,#0A1820);--ink:light-dark(#0F1E26,#EDE7DC);--muted:light-dark(#5A6B73,#9AABB3);
---deep:light-dark(#0B2C3D,#0B2C3D);--on-deep:#F4EEE2;--gold:light-dark(#C89B3C,#D9B25A);--on-gold:#0B2C3D;--gold-soft:light-dark(#F5EBD3,#2E2614);--gold-ink:light-dark(#8A6516,#E6C77E);
---line:light-dark(#E6E0D4,#1C3340);--card:light-dark(#ffffff,#0F2230);--soft:light-dark(#F1ECE2,#0D1F2A);
---ok:light-dark(#1F7A4D,#5FD39A);--ok-soft:light-dark(#E1F2E8,#12301F);--danger:light-dark(#B3261E,#FF8A80);--danger-soft:light-dark(#FBE7E5,#3A1716);--warn:light-dark(#8A5A00,#FFC062);--warn-soft:light-dark(#FFF3DC,#33260F)}
-:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+:root{color-scheme:dark;
+--bg:#06141E;--bg2:#0A1F2D;--ink:#F2ECDF;--muted:#9FB2BC;--deep:#0A2233;--on-deep:#F2ECDF;
+--gold:#D6AE5C;--gold-hi:#F3D892;--gold-lo:#B07F2A;--on-gold:#1C1305;--gold-soft:rgba(214,174,92,.14);--gold-ink:#E9C77D;
+--line:rgba(214,174,92,.2);--card:rgba(13,38,54,.78);--soft:rgba(255,255,255,.045);
+--ok:#45D98A;--ok-soft:rgba(69,217,138,.14);--danger:#FF8A80;--danger-soft:rgba(255,138,128,.12);--warn:#F2BE5A;--warn-soft:rgba(242,190,90,.12);
+--gold-grad:linear-gradient(180deg,#F6DC9A 0%,#D9B062 48%,#B9893A 100%)}
 *{box-sizing:border-box;min-width:0}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "IBM Plex Sans Arabic",Tahoma,sans-serif;overflow-x:clip}
+body{margin:0;background:radial-gradient(1200px 600px at 85% -10%,#0E2C42 0%,transparent 60%),radial-gradient(900px 500px at 0% 110%,#0B2536 0%,transparent 60%),var(--bg);background-attachment:fixed;color:var(--ink);font:16px/1.65 "IBM Plex Sans Arabic",Tahoma,sans-serif;overflow-x:clip}
 h1,h2,h3,.brand{font-family:"Readex Pro","IBM Plex Sans Arabic",sans-serif;line-height:1.15;text-wrap:balance;margin:0}
 h1{font-size:clamp(30px,5vw,48px);font-weight:700}h2{font-size:clamp(22px,3vw,28px);font-weight:600}h3{font-size:18px;font-weight:600}
 a{color:inherit}button,input,select,textarea{font-family:inherit}
@@ -35,71 +37,82 @@ a{color:inherit}button,input,select,textarea{font-family:inherit}
 .scroll{overflow-x:auto;scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}
 .demo{background:var(--warn-soft);color:var(--warn);font-size:13px;text-align:center;padding:6px 12px}
 /* زخرفة الزقورة */
-.zig{position:absolute;inset-inline:0;bottom:0;height:min(46%,260px);pointer-events:none;opacity:.09;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 260' preserveAspectRatio='xMidYMax meet'%3E%3Cg fill='none' stroke='%23C89B3C' stroke-width='2'%3E%3Crect x='150' y='200' width='900' height='60'/%3E%3Crect x='270' y='140' width='660' height='60'/%3E%3Crect x='390' y='80' width='420' height='60'/%3E%3Crect x='500' y='30' width='200' height='50'/%3E%3Cpath d='M580 260V80M620 260V80M560 200h80M560 140h80M600 30v-20'/%3E%3C/g%3E%3C/svg%3E") center bottom/contain no-repeat}
+.zig{position:absolute;inset-inline:0;bottom:0;height:min(46%,260px);pointer-events:none;opacity:.05;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 260' preserveAspectRatio='xMidYMax meet'%3E%3Cg fill='none' stroke='%23C89B3C' stroke-width='2'%3E%3Crect x='150' y='200' width='900' height='60'/%3E%3Crect x='270' y='140' width='660' height='60'/%3E%3Crect x='390' y='80' width='420' height='60'/%3E%3Crect x='500' y='30' width='200' height='50'/%3E%3Cpath d='M580 260V80M620 260V80M560 200h80M560 140h80M600 30v-20'/%3E%3C/g%3E%3C/svg%3E") center bottom/contain no-repeat}
 .steps{height:14px;opacity:.5;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='14'%3E%3Cpath d='M0 14V10h8V6h8V2h8V0h8v2h8v4h8v4h8v4' fill='none' stroke='%23C89B3C' stroke-width='1.4'/%3E%3C/svg%3E") repeat-x center}
-header.top{position:sticky;top:0;z-index:1000;background:var(--deep);color:var(--on-deep);padding:10px max(5vw,16px);border-bottom:2px solid var(--gold)}
+header.top{position:sticky;top:0;z-index:1000;background:linear-gradient(180deg,#0A2335,#071A27);color:var(--on-deep);padding:12px max(5vw,16px);border-bottom:1px solid rgba(214,174,92,.55);box-shadow:0 1px 0 rgba(243,216,146,.25),0 10px 30px rgba(0,0,0,.35);overflow:hidden}
+header.top .swoosh{position:absolute;inset-inline-start:-14px;top:-12px;transform:scaleX(-1);width:220px;height:90px;pointer-events:none;opacity:.9}
 .top .wrap{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;text-decoration:none}.brand small{font:400 13px "IBM Plex Sans Arabic";opacity:.75}
+.brand{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;text-decoration:none}.brand small{font:400 13px "IBM Plex Sans Arabic";opacity:.7;padding-inline-start:12px;border-inline-start:1px solid rgba(214,174,92,.45)}
 .top nav{display:flex;gap:4px;flex-wrap:wrap}
 .top nav a{text-decoration:none;padding:9px 14px;border-radius:999px;font-weight:500;font-size:15px}
-.top nav a.on,.top nav a:hover{background:rgba(255,255,255,.12)}.top nav a.cta{background:var(--gold);color:var(--on-gold)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:500;font-size:15px;cursor:pointer;text-decoration:none;white-space:nowrap}
-.btn.pri{background:var(--gold);border-color:var(--gold);color:var(--on-gold);font-weight:600}.btn.wa{background:#1fa855;border-color:#1fa855;color:#fff}.btn.dk{background:var(--deep);border-color:var(--deep);color:var(--on-deep)}
-.btn.ghost{background:transparent;color:inherit;border-color:rgba(255,255,255,.3)}.btn.sm{min-height:36px;padding:0 12px;font-size:13px;border-radius:10px}.btn.del{color:var(--danger)}
+.top nav a.on,.top nav a:hover{background:rgba(214,174,92,.12);color:var(--gold-hi)}.top nav a.cta{background:var(--gold-grad);color:var(--on-gold);font-weight:600;box-shadow:0 6px 18px rgba(214,174,92,.28),inset 0 1px 0 rgba(255,255,255,.5);display:inline-flex;gap:6px;align-items:center}
+.top nav a.cta svg{width:17px;height:17px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:999px;border:1px solid rgba(242,236,223,.28);background:rgba(255,255,255,.03);transition:transform .15s,box-shadow .2s,background .2s;color:var(--ink);font-weight:500;font-size:15px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{background:rgba(214,174,92,.08);border-color:rgba(214,174,92,.5)}.btn:active{transform:scale(.97)}
+.btn.pri{background:var(--gold-grad);border-color:transparent;color:var(--on-gold);font-weight:600;box-shadow:0 8px 22px rgba(214,174,92,.3),inset 0 1px 0 rgba(255,255,255,.55)}.btn.pri:hover{box-shadow:0 10px 28px rgba(214,174,92,.45),inset 0 1px 0 rgba(255,255,255,.55)}
+.btn.wa{background:var(--gold-grad);border-color:transparent;color:var(--on-gold);font-weight:600;box-shadow:0 8px 22px rgba(214,174,92,.3),inset 0 1px 0 rgba(255,255,255,.55)}.btn.dk{background:#0F3149;border-color:rgba(214,174,92,.45);color:var(--on-deep)}
+.btn.ghost{background:rgba(6,20,30,.35);color:inherit;border-color:rgba(242,236,223,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.btn svg{width:19px;height:19px;flex:none}.btn.sm{min-height:36px;padding:0 12px;font-size:13px;border-radius:10px}.btn.del{color:var(--danger)}
 .btn.on{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
 .btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible,.drop:focus-within{outline:3px solid var(--gold);outline-offset:2px}
 .btn[disabled]{opacity:.55;cursor:wait}
 svg.ic{width:18px;height:18px;flex:none}
-.hero{background:var(--deep);color:var(--on-deep);position:relative;overflow:hidden}
+.hero,.dhead{background:#081C2A;color:var(--on-deep);position:relative;overflow:hidden;isolation:isolate}
+.scene{position:absolute;inset:0;z-index:-1}.scene svg{width:100%;height:100%;display:block}.scene::after{content:"";position:absolute;inset:0;background:linear-gradient(to left,rgba(6,20,30,.94) 0%,rgba(6,20,30,.78) 42%,rgba(6,20,30,.35) 100%),linear-gradient(to top,var(--bg) 0%,transparent 30%)}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:center;position:relative}
 .hero p{font-size:17px;opacity:.85;max-width:56ch;margin:14px 0 22px}
-.search{display:grid;grid-template-columns:minmax(0,1fr) 170px;gap:8px;background:#fff;padding:8px;border-radius:16px;box-shadow:0 18px 40px rgba(0,0,0,.25)}
-.search input,.search select{border:0;background:#F4F0E8;color:#0F1E26;border-radius:10px;min-height:48px;padding:0 14px;font-size:16px}
+.search{display:grid;grid-template-columns:minmax(0,1fr) 170px;gap:8px;background:rgba(8,28,42,.75);padding:8px;border-radius:999px;border:1px solid rgba(214,174,92,.45);box-shadow:0 18px 40px rgba(0,0,0,.35);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.search input,.search select{border:0;background:rgba(255,255,255,.06);color:var(--ink);border-radius:999px;min-height:48px;padding:0 18px;font-size:16px}.search input::placeholder{color:var(--muted)}.search select option{background:#0A1F2D}
 .quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .qbtn{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:transparent;color:var(--on-deep);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none}
 .qbtn .dot{width:9px;height:9px;border-radius:50%;background:#5FD39A;box-shadow:0 0 0 3px rgba(95,211,154,.25)}
-.qbtn.on{background:#5FD39A;color:#0B2C3D;border-color:#5FD39A}.qbtn.on .dot{background:#0B2C3D;box-shadow:none}
-.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.stat{background:rgba(255,255,255,.08);border:1px solid rgba(200,155,60,.25);border-radius:12px;padding:8px 14px;font-size:14px}.stat b{font:600 20px "Readex Pro";display:block;color:#E6C77E}
-.hero-art svg{width:100%;height:auto;max-height:340px;display:block}
+.qbtn{border-color:rgba(242,236,223,.35)}.qbtn.on{background:#45D98A;color:#06141E;border-color:#45D98A}.qbtn.on .dot{background:#0B2C3D;box-shadow:none}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.stat{background:rgba(8,28,42,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(214,174,92,.3);border-radius:12px;padding:8px 14px;font-size:14px}.stat b{font:600 20px "Readex Pro";display:block;color:#E6C77E}
+.hero-art svg,.dart svg{width:100%;height:auto;max-height:360px;display:block;filter:drop-shadow(0 30px 40px rgba(0,0,0,.45))}
+.ring-run{animation:run 6s linear infinite}@keyframes run{to{stroke-dashoffset:-1200}}
+.floaty{animation:fl 6s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-8px)}}
 .chips{display:flex;gap:8px;padding:16px max(5vw,16px);border-bottom:1px solid var(--line)}
 .chip{flex:none;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:500;font-size:14px;cursor:pointer}
-.chip.on{background:var(--deep);color:var(--on-deep);border-color:var(--deep)}
+.chip{background:rgba(255,255,255,.03);border-color:rgba(214,174,92,.25)}.chip.on{background:var(--gold-grad);color:var(--on-gold);border-color:transparent;font-weight:600}
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:18px;flex-wrap:wrap}.sec-head p{margin:4px 0 0;color:var(--muted);font-size:15px}
-.sel{min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:0 12px;font-size:15px}
+.sel{min-height:44px;border-radius:999px;border:1px solid rgba(214,174,92,.35);background:#0A1F2D;padding-inline:16px;color:var(--ink);padding:0 12px;font-size:15px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
-.card{display:flex;gap:14px;align-items:center;padding:16px;border:1px solid var(--line);border-radius:18px;background:var(--card);text-decoration:none;transition:transform .2s,box-shadow .2s}
-.card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(11,44,61,.12)}
-.card.feat{border-color:var(--gold)}
+.card{display:flex;gap:14px;align-items:center;padding:16px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(160deg,rgba(18,48,68,.85),rgba(9,29,42,.85));box-shadow:inset 0 1px 0 rgba(255,255,255,.05);text-decoration:none;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-2px);border-color:rgba(214,174,92,.5);box-shadow:0 14px 32px rgba(0,0,0,.35)}
+.card.feat{border-color:rgba(214,174,92,.65);box-shadow:0 0 0 1px rgba(214,174,92,.2),0 10px 30px rgba(214,174,92,.08)}
 .card b{font:600 17px "Readex Pro"}.card .sub{display:block;color:var(--muted);font-size:14px}
 .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;font-size:13px;color:var(--muted)}
 .pill{padding:2px 10px;border-radius:999px;background:var(--soft);white-space:nowrap;font-size:13px}
-.pill.open{background:var(--ok-soft);color:var(--ok);font-weight:600}.pill.gold{background:var(--gold-soft);color:var(--gold-ink);font-weight:600}
+.pill{display:inline-flex;align-items:center;gap:5px}.pill.open{background:var(--ok-soft);color:var(--ok);font-weight:600;border:1px solid rgba(69,217,138,.35)}.pill.open::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}.pill.gold{background:var(--gold-soft);color:var(--gold-ink);font-weight:600;border:1px solid rgba(214,174,92,.4)}
 .pill.pending{background:var(--warn-soft);color:var(--warn);font-weight:600}.pill.approved{background:var(--ok-soft);color:var(--ok);font-weight:600}.pill.rejected,.pill.suspended{background:var(--danger-soft);color:var(--danger);font-weight:600}
 .vf{display:inline-flex;vertical-align:-3px;margin-inline-start:4px}
-.av{flex:none;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font:600 22px "Readex Pro";color:#fff;overflow:hidden;background:var(--deep);border:2px solid var(--gold-soft)}
-.av img{width:100%;height:100%;object-fit:cover}.av.lg{width:108px;height:108px;font-size:38px;border:3px solid var(--gold)}.av.sm{width:44px;height:44px;font-size:16px}
+.av{flex:none;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font:600 22px "Readex Pro";color:#fff;overflow:hidden;background:var(--deep);border:2px solid rgba(214,174,92,.55)}
+.av img{width:100%;height:100%;object-fit:cover}.av.lg{width:132px;height:132px;font-size:46px;border:4px solid var(--gold);box-shadow:0 0 0 6px rgba(214,174,92,.12),0 0 40px rgba(214,174,92,.25);background:radial-gradient(circle at 35% 30%,#1B3E55,#08192A)}.av.sm{width:44px;height:44px;font-size:16px}
 .feed{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
-.case{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card);cursor:pointer;text-align:start;padding:0;font:inherit;color:inherit;display:block;width:100%}
+.case{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--card);transition:transform .2s,border-color .2s;cursor:pointer;text-align:start;padding:0;font:inherit;color:inherit;display:block;width:100%}
 .case .ph{aspect-ratio:4/3;background:var(--soft);position:relative}.case .ph img{width:100%;height:100%;object-fit:cover;display:block}
 .case .ph .tag{position:absolute;top:10px;inset-inline-start:10px;background:rgba(11,44,61,.88);color:#F4EEE2;font-size:12px;padding:3px 10px;border-radius:999px}
 .case .ph .hid{position:absolute;inset:0;background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;font-weight:600}
 .case .tx{padding:10px 14px 14px}.case .tx b{display:block;font-weight:600}.case .tx span{color:var(--muted);font-size:13px}
-.empty{padding:32px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:18px}
+.empty{padding:34px 20px;text-align:center;color:var(--ink);border:1px dashed rgba(214,174,92,.55);border-radius:22px;background:rgba(10,31,45,.55);display:grid;gap:10px;justify-items:center;font-size:17px}
+.empty .ei{width:52px;height:52px;color:var(--gold)}
 .tips{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
-.tip{border-radius:18px;padding:20px;background:var(--deep);color:var(--on-deep);border-top:3px solid var(--gold)}.tip p{margin:8px 0 0;opacity:.85;white-space:pre-line}
-.dhead{background:var(--deep);color:var(--on-deep);position:relative;overflow:hidden}.dhead .wrap{position:relative}.dhead .who{flex:1 1 300px}.dhead .who p{margin:6px 0 0;opacity:.85}
+.tip{border-radius:20px;padding:22px;background:linear-gradient(160deg,#10344B,#0A2232);color:var(--on-deep);border:1px solid var(--line);border-top:3px solid var(--gold)}.tip p{margin:8px 0 0;opacity:.85;white-space:pre-line}
+.dgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:24px;align-items:center}.dart{max-width:380px}.dhead .who{flex:1 1 300px}.dhead .who p{margin:6px 0 0;opacity:.85}
 .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-.back{color:var(--on-deep);opacity:.8;text-decoration:none;font-size:14px;display:inline-block;margin-bottom:14px}
+.back{display:inline-flex;gap:6px;align-items:center;color:var(--on-deep);opacity:.85;text-decoration:none;font-size:14px;display:inline-block;margin-bottom:14px}
 .tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);padding:0 max(5vw,16px)}
+.tabs.curve{background:linear-gradient(180deg,#0D2A3D,var(--bg));border-radius:48px 48px 0 0;margin-top:-34px;position:relative;z-index:2;border:1px solid rgba(214,174,92,.25);border-bottom-color:var(--line);justify-content:flex-start;padding-top:6px}
+.tabs button svg{width:20px;height:20px;vertical-align:-4px;margin-inline-end:6px}
 .tabs button{flex:none;border:0;background:none;color:var(--muted);font-weight:500;font-size:15px;padding:14px 12px;border-bottom:3px solid transparent;cursor:pointer;min-height:48px}
-.tabs button.on{color:var(--ink);border-bottom-color:var(--gold)}.tabs .n{background:var(--danger);color:#fff;border-radius:999px;font-size:11px;padding:1px 7px;margin-inline-start:4px}
+.tabs button.on{color:var(--gold-hi);border-bottom-color:var(--gold)}.tabs .n{background:var(--danger);color:#fff;border-radius:999px;font-size:11px;padding:1px 7px;margin-inline-start:4px}
 .info{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.box{border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--card)}.box h3{margin-bottom:8px}.box p{margin:0}
+.box{border:1px solid var(--line);border-radius:20px;padding:20px;background:var(--card)}.box h3{margin-bottom:8px}.box p{margin:0}
 .tagsr{display:flex;gap:6px;flex-wrap:wrap}
 .days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin-top:8px}
-.days span{text-align:center;padding:8px 0;border-radius:8px;font-size:12px;background:var(--soft);color:var(--muted)}.days span.on{background:var(--deep);color:var(--on-deep)}
+.days span{text-align:center;padding:8px 0;border-radius:8px;font-size:12px;background:var(--soft);color:var(--muted)}.days span.on{background:var(--gold-soft);color:var(--gold-hi);border:1px solid rgba(214,174,92,.45)}
 .modal{position:fixed;inset:0;background:rgba(5,18,25,.74);display:none;align-items:center;justify-content:center;padding:16px;z-index:2000}.modal.on{display:flex}
-.mbox{background:var(--card);color:var(--ink);border-radius:22px;max-width:760px;width:100%;max-height:92vh;overflow:auto}.mbox .tx{padding:18px 20px 22px}
+.mbox{background:#0B2131;border:1px solid var(--line);color:var(--ink);border-radius:22px;max-width:760px;width:100%;max-height:92vh;overflow:auto}.mbox .tx{padding:18px 20px 22px}
 .ba{position:relative;aspect-ratio:4/3;background:#000;overflow:hidden;user-select:none}
 .ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.ba .after{position:absolute;inset:0}
 .ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
@@ -109,7 +122,7 @@ svg.ic{width:18px;height:18px;flex:none}
 .x{position:sticky;top:10px;float:left;margin:10px;z-index:2;width:44px;height:44px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:22px;cursor:pointer}
 .dash{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:start}
 form.f{display:grid;gap:12px}.f label{display:grid;gap:5px;font-size:14px;font-weight:500}
-.f input,.f select,.f textarea{min-height:46px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:10px 12px;font-size:16px}
+.f input,.f select,.f textarea{min-height:46px;border-radius:12px;border:1px solid rgba(214,174,92,.25);background:#081B27;color:var(--ink);padding:10px 12px;font-size:16px}
 .f textarea{min-height:96px;resize:vertical}
 .row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
 .dchk{display:flex;flex-wrap:wrap;gap:6px}.dchk label{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-weight:400}
@@ -142,12 +155,12 @@ form.f{display:grid;gap:12px}.f label{display:grid;gap:5px;font-size:14px;font-w
 .banner{padding:14px 18px;border-radius:14px;margin-bottom:18px;font-weight:500}
 .banner.pending{background:var(--warn-soft);color:var(--warn)}.banner.approved{background:var(--ok-soft);color:var(--ok)}.banner.rejected,.banner.suspended{background:var(--danger-soft);color:var(--danger)}
 .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px}
-.tile{border-radius:16px;padding:16px 18px;background:var(--soft);border-top:3px solid var(--gold)}.tile b{display:block;font:600 clamp(26px,4vw,34px) "Readex Pro";color:var(--ink)}.tile span{color:var(--muted);font-size:14px}
+.tile{border-radius:16px;padding:16px 18px;background:var(--soft);border-top:3px solid var(--gold)}.tile b{display:block;font:600 clamp(26px,4vw,34px) "Readex Pro";background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}.tile span{color:var(--muted);font-size:14px}
 .bars{display:grid;gap:8px}.brow{display:grid;grid-template-columns:minmax(0,9em) minmax(0,1fr) 3em;gap:10px;align-items:center;font-size:14px}
-.brow i{display:block;height:12px;border-radius:6px;background:var(--gold)}.brow .num{text-align:left;font-variant-numeric:tabular-nums}
+.brow i{display:block;height:12px;border-radius:6px;background:var(--gold-grad)}.brow .num{text-align:left;font-variant-numeric:tabular-nums}
 .auth{max-width:440px;margin:0 auto}
 .seg{display:grid;grid-template-columns:1fr 1fr;background:var(--soft);border-radius:12px;padding:4px;margin-bottom:16px}
-.seg button{border:0;background:none;min-height:42px;border-radius:9px;font-weight:500;font-size:15px;color:var(--muted);cursor:pointer}.seg button.on{background:var(--card);color:var(--ink);box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.seg button{border:0;background:none;min-height:42px;border-radius:9px;font-weight:500;font-size:15px;color:var(--muted);cursor:pointer}.seg button.on{background:var(--gold-grad);color:var(--on-gold);font-weight:600}
 .linkb{background:none;border:0;color:var(--gold-ink);cursor:pointer;font-size:14px;padding:8px 0}
 /* الخارطة */
 .mapgrid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
@@ -175,26 +188,70 @@ form.f{display:grid;gap:12px}.f label{display:grid;gap:5px;font-size:14px;font-w
 .qrcard .code{background:#fff;width:212px;height:212px;margin:-40px auto 0;position:relative;border-radius:16px;padding:16px;border:2px solid #C89B3C;display:grid;place-items:center}
 .qrcard .code img,.qrcard .code canvas{width:176px!important;height:176px!important}
 .qrcard .bt{text-align:center;padding:14px 20px 22px;font-size:14px;color:#5A6B73}.qrcard .bt b{display:block;color:#0F1E26;font:600 16px "Readex Pro";margin-bottom:2px}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--deep);color:var(--on-deep);padding:12px 20px;border-radius:12px;z-index:3000;transition:transform .3s,opacity .3s;max-width:90vw;opacity:0;pointer-events:none;border:1px solid var(--gold)}
+.toast{background:#0F3149!important;position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--deep);color:var(--on-deep);padding:12px 20px;border-radius:12px;z-index:3000;transition:transform .3s,opacity .3s;max-width:90vw;opacity:0;pointer-events:none;border:1px solid var(--gold)}
 .toast.on{transform:translateX(-50%) translateY(0);opacity:1}
-footer{padding:28px max(5vw,16px);color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+footer{padding:8px max(5vw,16px) 40px;color:var(--muted);font-size:14px;position:relative;overflow:hidden;text-align:center}
+.fdiv{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:14px;max-width:1240px;margin:0 auto 14px}.fdiv i{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}.fdiv svg{width:40px;height:40px;color:var(--gold)}
+footer .wave{position:absolute;bottom:0;width:340px;height:120px;pointer-events:none;opacity:.8}footer .wave.l{left:0}footer .wave.r{right:0;transform:scaleX(-1)}footer .wrap{position:relative}
 .sparkle{animation:tw 2.6s ease-in-out infinite;transform-origin:center;transform-box:fill-box}@keyframes tw{50%{opacity:.35;transform:scale(.7)}}
 @media(prefers-reduced-motion:reduce){.sparkle{animation:none}.card{transition:none}}
 @media(max-width:960px){.mapgrid{grid-template-columns:minmax(0,1fr)}.mapbox{height:58vh}.mlist{max-height:none}.qrwrap{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:860px){.dash{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:700px){.hero .wrap{grid-template-columns:minmax(0,1fr)}.hero-art{order:-1;max-width:200px;margin:0 auto}.search{grid-template-columns:minmax(0,1fr)}.brand small{display:none}}
 @media(max-width:420px){.row2{grid-template-columns:minmax(0,1fr)}.days span{font-size:10px}.brow{grid-template-columns:minmax(0,7em) minmax(0,1fr) 2.5em}.top nav a{padding:8px 10px;font-size:14px}}
+
+/* ===== تجربة الموبايل (شبيهة بالتطبيقات) ===== */
+*{-webkit-tap-highlight-color:transparent}a,button,input,select,label{touch-action:manipulation}
+html{scroll-behavior:smooth}
+#app>*{animation:fin .28s ease both}@keyframes fin{from{opacity:0;transform:translateY(6px)}}
+.sk{border-radius:18px;height:98px;background:linear-gradient(90deg,var(--soft) 25%,var(--line) 50%,var(--soft) 75%);background-size:200% 100%;animation:sh 1.2s linear infinite}@keyframes sh{to{background-position:-200% 0}}
+.bnav{display:none}
+.dact{display:none}
+@media(max-width:760px){
+  header.top{padding:max(10px,env(safe-area-inset-top)) 16px 10px}
+  .top nav{display:none}.brand{font-size:19px}
+  .bnav{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);position:fixed;bottom:0;left:0;right:0;z-index:1500;background:rgba(7,24,36,.9);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -6px 20px rgba(11,44,61,.08)}
+  .bnav a{display:grid;justify-items:center;align-content:center;gap:3px;min-height:54px;color:var(--muted);text-decoration:none;font-size:11px;font-weight:500}
+  .bnav a i{display:grid;place-items:center;width:52px;height:30px;border-radius:999px;transition:background .2s}
+  .bnav a svg{width:23px;height:23px}
+  .bnav a.on{color:var(--ink)}.bnav a.on i{background:var(--gold-soft);color:var(--gold-ink)}
+  body{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+  body.has-dact{padding-bottom:calc(136px + env(safe-area-inset-bottom))}
+  .dact{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:8px;position:fixed;left:0;right:0;bottom:calc(66px + env(safe-area-inset-bottom));z-index:1400;padding:10px 12px;background:rgba(6,20,30,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .dact .btn{min-height:48px;border-radius:14px}
+  .toast{bottom:calc(84px + env(safe-area-inset-bottom))}
+  .band{padding:22px 16px}
+  .hero.band{padding:26px 16px 30px}
+  .search{border-radius:24px}.search input,.search select{border-radius:16px}
+  .hero-art{display:block;order:-1;max-width:170px;margin:-6px auto 0}.dgrid{grid-template-columns:minmax(0,1fr)}.dart{display:none}.tabs.curve{margin-top:-24px;border-radius:30px 30px 0 0}header.top .swoosh{width:140px;height:70px}footer .wave{width:180px;height:70px}
+  h1{font-size:clamp(26px,7.4vw,32px)}.hero p{font-size:15px;margin:10px 0 16px}
+  .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.stat{padding:8px 10px;font-size:12px}.stat b{font-size:19px}
+  .chips{padding:12px 16px}
+  .card{padding:12px;gap:12px;border-radius:16px}.av{width:56px;height:56px;font-size:20px}
+  .feed{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.case .tx{padding:8px 10px 10px}.case .tx b{font-size:14px;line-height:1.35}
+  .tabs{position:sticky;top:calc(58px + env(safe-area-inset-top));z-index:900;background:var(--bg);padding:0 8px}
+  .dhead #wa,.dhead #call{display:none}.dhead h1{font-size:26px}.av.lg{width:84px;height:84px;font-size:30px}
+  .modal{align-items:flex-end;padding:0}
+  .mbox{border-radius:22px 22px 0 0;max-height:94vh;animation:sheet .3s cubic-bezier(.2,.8,.2,1);padding-bottom:env(safe-area-inset-bottom)}
+  .mbox::before{content:"";display:block;width:44px;height:5px;border-radius:3px;background:var(--line);margin:8px auto 0}
+  @keyframes sheet{from{transform:translateY(100%)}}
+  .sec-head{margin-bottom:12px}
+  .mapbox{height:52vh;border-radius:14px}
+}
+@media(prefers-reduced-motion:reduce){#app>*,.mbox,.sk{animation:none}}
 @media print{body *{visibility:hidden!important}.qrcard,.qrcard *{visibility:visible!important}.qrcard{position:absolute;top:0;left:0;right:0;margin:auto;width:420px;box-shadow:none}header,footer,.demo{display:none}}
 </style>
 </head>
 <body>
 <div class="demo" id="demoBar" hidden>وضع تجريبي: البيانات محفوظة على هذا الجهاز فقط. للتجربة كمدير ادخل بالبريد admin@demo.iq</div>
-<header class="top"><div class="wrap">
-  <a class="brand" href="#/"><svg width="30" height="30" viewBox="0 0 260 240" aria-hidden="true"><path fill="#F4EEE2" d="M60 40C60 10 110 5 130 20C150 5 200 10 200 40C205 80 190 110 185 150C180 190 170 215 155 215C140 215 140 160 130 160C120 160 120 215 105 215C90 215 80 190 75 150C70 110 55 80 60 40Z"/><path fill="#C89B3C" d="M40 230h180v-8H40z"/></svg>بسمة ذي قار <small>دليل أطباء الأسنان</small></a>
+<header class="top"><svg class="swoosh" viewBox="0 0 220 90" aria-hidden="true"><defs><linearGradient id="sw" x1="0" x2="1"><stop offset="0" stop-color="#B07F2A" stop-opacity="0"/><stop offset=".6" stop-color="#F3D892"/><stop offset="1" stop-color="#D6AE5C"/></linearGradient></defs><path d="M0 92C70 88 120 70 160 40S210 0 230 -6" fill="none" stroke="url(#sw)" stroke-width="3"/><path d="M40 96C100 90 150 70 185 44S220 8 236 2" fill="none" stroke="url(#sw)" stroke-width="1.2" opacity=".6"/></svg><div class="wrap">
+  <a class="brand" href="#/"><img src="icon-192.png" alt="" width="34" height="34" style="border-radius:9px;box-shadow:0 0 0 1px rgba(200,155,60,.5)">بسمة ذي قار <small>دليل أطباء الأسنان</small></a>
   <nav id="nav"></nav>
 </div></header>
-<main id="app"><div class="band"><div class="wrap"><p class="msg">جارٍ التحميل…</p></div></div></main>
-<footer><div class="steps" style="margin-bottom:16px"></div><div class="wrap">بسمة ذي قار — دليل أطباء الأسنان في محافظة ذي قار. الحالات المنشورة مسؤولية الطبيب الناشر وتُنشر بموافقة المريض مع إخفاء هويته. الدليل لا يغني عن الفحص السريري. الخرائط © مساهمو OpenStreetMap.</div></footer>
+<main id="app" aria-live="polite"><div class="band"><div class="wrap"><p class="msg">جارٍ التحميل…</p></div></div></main>
+<footer><div class="fdiv"><i></i><svg viewBox="0 0 260 240" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round" aria-hidden="true"><path d="M60 40C60 10 110 5 130 20C150 5 200 10 200 40C205 80 190 110 185 150C180 190 170 215 155 215C140 215 140 160 130 160C120 160 120 215 105 215C90 215 80 190 75 150C70 110 55 80 60 40Z"/></svg><i></i></div><svg class="wave l" viewBox="0 0 340 120" aria-hidden="true"><path d="M0 40C80 40 140 80 200 100S300 118 340 120" fill="none" stroke="#D6AE5C" stroke-width="2" opacity=".8"/><path d="M0 70C70 70 130 98 190 110S290 122 340 124" fill="none" stroke="#D6AE5C" stroke-width="1" opacity=".45"/><path d="M0 40C80 40 140 80 200 100S300 118 340 120V120H0Z" fill="#0B2536" opacity=".6"/></svg><svg class="wave r" viewBox="0 0 340 120" aria-hidden="true"><path d="M0 40C80 40 140 80 200 100S300 118 340 120" fill="none" stroke="#D6AE5C" stroke-width="2" opacity=".8"/><path d="M0 40C80 40 140 80 200 100S300 118 340 120V120H0Z" fill="#0B2536" opacity=".6"/></svg><div class="wrap">بسمة ذي قار — دليل أطباء الأسنان في محافظة ذي قار. الحالات المنشورة مسؤولية الطبيب الناشر وتُنشر بموافقة المريض مع إخفاء هويته. الدليل لا يغني عن الفحص السريري. الخرائط © مساهمو OpenStreetMap.</div></footer>
+<nav class="bnav" id="bnav" aria-label="التنقل"></nav>
+<div class="dact" id="dact" hidden></div>
 <div class="modal" id="modal" role="dialog" aria-modal="true"><div class="mbox" id="mbox"></div></div>
 <div class="toast" id="toast" role="status"></div>
 <script>
@@ -228,6 +285,38 @@ const IC={pin:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentCo
   gps:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>',
   up:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"/></svg>',
   lock:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>'};
+const BI={'':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 010 6.8M18 14.8c1.8.7 3 2.4 3.5 5.2"/></svg>',map:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',cases:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M12 4v16"/><path d="M6 15l2.5-3 2 2M14 15l2.5-3 3 3.5"/></svg>',admin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 7.7-8 9-4.6-1.3-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>',dash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.2-6 8-6s7 2 8 6"/></svg>'};BI.login=BI.dash;
+const IX={
+ wa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.7 2.3a1 1 0 00-1.05-.23l-18 7a1 1 0 00.05 1.88l7.6 2.6 2.6 7.6a1 1 0 001.88.05l7-18a1 1 0 00-.08-.9zM10.9 12l5.6-5.6-4.6 7.1-.4-1.2z"/></svg>',
+ call:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.57 3.6 1 1 0 01-.25 1z"/></svg>',
+ link:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5zm-1.2 13.2l5.3-5.3-1.4-1.4-3.9 3.9-1.9-1.9-1.4 1.4z"/></svg>',
+ home:'<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></svg>',
+ user:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4.2"/><path d="M3.5 21c.9-4.4 4.3-6.8 8.5-6.8s7.6 2.4 8.5 6.8z"/></svg>',
+ bag:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 3h6a2 2 0 012 2v1h3a2 2 0 012 2v10a3 3 0 01-3 3H5a3 3 0 01-3-3V8a2 2 0 012-2h3V5a2 2 0 012-2zm0 3h6V5H9zm2 5v2H9v2h2v2h2v-2h2v-2h-2v-2z"/></svg>',
+ pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+ empty:'<svg class="ei" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M28 5H12a4 4 0 00-4 4v30a4 4 0 004 4h10"/><path d="M28 5l10 10v6"/><path d="M28 5v10h10"/><path d="M15 20h8M15 27h6"/><circle cx="33" cy="33" r="7"/><path d="M38 38l5 5"/></svg>'};
+const emptyBox=t=>`<div class="empty">${IX.empty}<span>${t}</span></div>`;
+const SCENE=`<div class="scene" aria-hidden="true"><svg viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="scg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12395A"/><stop offset="1" stop-color="#071A28"/></linearGradient><filter id="bl" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter><filter id="bl2"><feGaussianBlur stdDeviation="16"/></filter><radialGradient id="lamp"><stop offset="0" stop-color="#DDEBFF" stop-opacity=".9"/><stop offset="1" stop-color="#DDEBFF" stop-opacity="0"/></radialGradient></defs>
+<rect width="1600" height="600" fill="url(#scg)"/>
+<g filter="url(#bl2)" opacity=".55"><rect x="60" y="60" width="380" height="230" rx="10" fill="#2D6A96"/><rect x="1180" y="40" width="300" height="210" rx="10" fill="#2A5F88"/></g>
+<g filter="url(#bl)" opacity=".7"><ellipse cx="360" cy="70" rx="120" ry="14" fill="#BFD8F2"/><ellipse cx="820" cy="58" rx="90" ry="12" fill="#BFD8F2"/><ellipse cx="1260" cy="66" rx="110" ry="13" fill="#BFD8F2"/>
+<rect x="470" y="170" width="70" height="200" rx="8" fill="#355E80"/><rect x="560" y="200" width="54" height="170" rx="8" fill="#2E5574"/><rect x="1330" y="250" width="200" height="140" rx="10" fill="#244A68"/><rect x="1360" y="200" width="40" height="60" rx="6" fill="#4A7698"/><rect x="1420" y="190" width="30" height="70" rx="6" fill="#4A7698"/>
+<path d="M650 470C700 380 760 330 840 320L960 318C990 318 1000 340 990 360L930 420 1060 420C1100 420 1120 450 1110 480L1090 520H700Z" fill="#2B5F86"/><path d="M820 320L770 190C765 175 780 165 795 170L860 300Z" fill="#2F668F"/><rect x="860" y="520" width="80" height="60" fill="#1D4562"/><path d="M1000 300C1040 260 1100 250 1150 270" stroke="#3B6E95" stroke-width="16" fill="none"/><circle cx="1160" cy="280" r="34" fill="#9FC3E4" opacity=".8"/></g>
+<g filter="url(#bl2)"><circle cx="1160" cy="280" r="70" fill="url(#lamp)"/><circle cx="360" cy="80" r="90" fill="url(#lamp)" opacity=".5"/><circle cx="1260" cy="70" r="90" fill="url(#lamp)" opacity=".5"/></g>
+<g fill="#CFE3FF" opacity=".18" filter="url(#bl)"><circle cx="200" cy="420" r="26"/><circle cx="1480" cy="420" r="30"/><circle cx="1000" cy="140" r="18"/><circle cx="620" cy="110" r="22"/></g></svg></div>`;
+let toothN=0;
+function tooth3D(){const n=++toothN,g=k=>k+n;return`<svg viewBox="0 0 420 380" role="img" aria-label="ضرس لامع بحلقة ذهبية"><defs>
+<radialGradient id="${g('en')}" cx=".36" cy=".28" r=".85"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#EEF3F8"/><stop offset=".8" stop-color="#B9C9D8"/><stop offset="1" stop-color="#8FA5BA"/></radialGradient>
+<linearGradient id="${g('rg')}" x1="0" x2="1"><stop offset="0" stop-color="#8A6420"/><stop offset=".25" stop-color="#F6DC9A"/><stop offset=".5" stop-color="#C99A3E"/><stop offset=".75" stop-color="#FFF2C8"/><stop offset="1" stop-color="#9C7428"/></linearGradient>
+<radialGradient id="${g('hal')}"><stop offset="0" stop-color="#6FA8D6" stop-opacity=".45"/><stop offset="1" stop-color="#6FA8D6" stop-opacity="0"/></radialGradient>
+<filter id="${g('gl')}" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<clipPath id="${g('top')}"><rect x="-100" y="-100" width="620" height="315"/></clipPath><clipPath id="${g('bot')}"><rect x="-100" y="215" width="620" height="300"/></clipPath></defs>
+<circle cx="210" cy="180" r="170" fill="url(#${g('hal')})"/>
+<g transform="rotate(-14 210 215)" filter="url(#${g('gl')})" clip-path="url(#${g('top')})"><ellipse cx="210" cy="215" rx="185" ry="50" fill="none" stroke="url(#${g('rg')})" stroke-width="5"/><ellipse cx="210" cy="215" rx="196" ry="56" fill="none" stroke="#F3D892" stroke-width="1.2" opacity=".55"/></g>
+<g class="floaty"><g transform="translate(47.5 22) scale(1.25)"><path fill="url(#${g('en')})" d="M60 40C60 10 110 5 130 20C150 5 200 10 200 40C205 80 190 110 185 150C180 190 170 215 155 215C140 215 140 160 130 160C120 160 120 215 105 215C90 215 80 190 75 150C70 110 55 80 60 40Z"/>
+<path d="M80 52C84 28 108 22 122 34" stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round" opacity=".95"/><path d="M168 30C186 34 194 48 192 66" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/><path d="M174 100C178 140 168 175 160 200" stroke="#7E94AA" stroke-width="6" fill="none" stroke-linecap="round" opacity=".35"/></g></g>
+<g transform="rotate(-14 210 215)" filter="url(#${g('gl')})" clip-path="url(#${g('bot')})"><ellipse cx="210" cy="215" rx="185" ry="50" fill="none" stroke="url(#${g('rg')})" stroke-width="5"/><ellipse class="ring-run" cx="210" cy="215" rx="185" ry="50" fill="none" stroke="#FFF6D6" stroke-width="2.2" stroke-dasharray="60 1140" stroke-linecap="round"/><ellipse cx="210" cy="215" rx="196" ry="56" fill="none" stroke="#F3D892" stroke-width="1.2" opacity=".55"/></g>
+<g fill="#F6DC9A"><circle cx="58" cy="236" r="3"/><circle cx="372" cy="178" r="2.5"/><path d="M350 70l5 13 13 5-13 5-5 13-5-13-13-5 13-5z" opacity=".9"/></g></svg>`}
 const initial=d=>esc(String(d.name||'؟').replace(/^د\s*\.?\s*/,'').trim().charAt(0)||'؟');
 const colorOf=d=>{let h=0;for(const c of String(d.id))h=(h*31+c.charCodeAt(0))>>>0;return COLORS[h%COLORS.length]};
 const avatar=(d,cls='')=>{const src=safeImg(d.photo_url);if(src)return`<div class="av ${cls}"><img src="${src}" alt=""></div>`;return`<div class="av ${cls}" style="background:${colorOf(d)}">${initial(d)}</div>`};
@@ -383,6 +472,7 @@ const cfg=window.BASMA_CONFIG||{};
 let API=cfg.SUPABASE_URL&&cfg.SUPABASE_ANON_KEY?Live(cfg):Demo();
 const S={me:null,role:null,docs:[],latest:[],tips:[],at:0,filt:{q:'',area:'',spec:'',sort:'top',open:false},tab:{},myLoc:null};
 async function loadPublic(force){if(!force&&Date.now()-S.at<30000)return;[S.docs,S.latest,S.tips]=await Promise.all([API.listDoctors(),API.latestCases(12),API.tips()]);S.at=Date.now()}
+function setDact(h){const e=$('#dact');e.innerHTML=h;e.hidden=!h;document.body.classList.toggle('has-dact',!!h)}
 const docName=id=>S.docs.find(d=>d.id===id);
 const setApp=h=>{$('#app').innerHTML=h};
 const wrapMsg=t=>`<div class="band"><div class="wrap"><div class="msg">${t}</div></div></div>`;
@@ -392,10 +482,13 @@ function nav(){
   const L=[['','الأطباء'],['map','خارطة الأطباء'],['cases','الحالات']];
   if(S.role==='admin')L.push(['admin','الإدارة']);
   L.push(S.me?['dash','لوحتي']:['login','دخول الأطباء']);
-  $('#nav').innerHTML=L.map(([k,t],i)=>`<a href="#/${k}" class="${(r===k||(k==='dash'&&r==='login'))?'on':''} ${i===L.length-1?'cta':''}">${t}</a>`).join('');
+  const on=k=>r===k||(k==='dash'&&r==='login')||(k===''&&r==='d');
+  $('#nav').innerHTML=L.map(([k,t],i)=>`<a href="#/${k}" class="${on(k)?'on':''} ${i===L.length-1?'cta':''}">${i===L.length-1?IX.user:''}${t}</a>`).join('');
+  const short={'':'الأطباء',map:'الخارطة',cases:'الحالات',admin:'الإدارة',dash:'لوحتي',login:'دخول'};
+  $('#bnav').innerHTML=L.map(([k])=>`<a href="#/${k}" class="${on(k)?'on':''}" ${on(k)?'aria-current="page"':''}><i>${BI[k]}</i>${short[k]}</a>`).join('');
 }
 async function route(){
-  closeM();killMaps();nav();const p=location.hash.replace(/^#\/?/,'').split('/');
+  closeM();killMaps();nav();setDact('');const p=location.hash.replace(/^#\/?/,'').split('/');
   try{
     if(p[0]==='d'&&p[1])return await pageDoctor(decodeURIComponent(p[1]));
     if(p[0]==='map')return await pageMap();
@@ -409,16 +502,16 @@ async function route(){
 
 /* ================= واجهة الناس ================= */
 async function pageHome(toCases){
-  setApp(`<section class="hero band"><div class="zig"></div><div class="wrap"><div><h1>طبيب أسنانك في ذي قار، بحالاته الحقيقية</h1>
+  setApp(`<section class="hero band">${SCENE}<div class="zig"></div><div class="wrap"><div><h1>طبيب أسنانك في ذي قار، بحالاته الحقيقية</h1>
     <p>من أرض أور إلى ابتسامتك: تصفّح أطباء الأسنان في الناصرية والأقضية، شاهد نتائجهم قبل وبعد، وتواصل مع العيادة مباشرة.</p>
     <div class="search" role="search"><input id="q" type="search" placeholder="اسم الطبيب، العيادة أو الخدمة" aria-label="بحث" value="${esc(S.filt.q)}">
     <select id="area" aria-label="المنطقة"><option value="">كل المناطق</option>${AREAS.map(a=>`<option ${a===S.filt.area?'selected':''}>${a}</option>`).join('')}</select></div>
     <div class="quick"><button class="qbtn ${S.filt.open?'on':''}" id="openNow" aria-pressed="${S.filt.open}"><span class="dot"></span>مفتوح الآن</button><a class="qbtn" href="#/map">${IC.pin}الأقرب إليّ على الخارطة</a></div>
-    <div class="stats" id="stats"></div></div><div class="hero-art">${heroArt}</div></div></section>
+    <div class="stats" id="stats"></div></div><div class="hero-art">${tooth3D()}</div></div></section>
   <nav class="chips scroll" aria-label="الاختصاص"><button class="chip" data-s="">كل الاختصاصات</button>${SPECS.map(s=>`<button class="chip" data-s="${s}">${s}</button>`).join('')}</nav>
   <section class="band"><div class="wrap"><div class="sec-head"><div><h2>الأطباء</h2><p id="cnt"></p></div>
     <select class="sel" id="sort" aria-label="الترتيب"><option value="top">المميزون أولاً</option><option value="cases">الأكثر حالات</option><option value="new">الأحدث</option></select></div>
-    <div id="grid" class="grid"><div class="empty">جارٍ تحميل الأطباء…</div></div></div></section>
+    <div id="grid" class="grid">${'<div class="sk"></div>'.repeat(6)}</div></div></section>
   <div class="steps"></div>
   <section class="band soft" id="cases"><div class="wrap"><div class="sec-head"><div><h2>أحدث الحالات</h2><p>اسحب على الصورة لمقارنة قبل وبعد.</p></div></div><div id="feed" class="feed"></div></div></section>
   <div class="steps"></div>
@@ -431,7 +524,7 @@ async function pageHome(toCases){
   const open=S.docs.filter(d=>openNow(d)).length,cc=S.docs.reduce((a,d)=>a+d.case_count,0);
   $('#stats').innerHTML=`<div class="stat"><b>${S.docs.length}</b>طبيب</div><div class="stat"><b>${cc}</b>حالة منشورة</div><div class="stat"><b>${open}</b>عيادة مفتوحة الآن</div>`;
   grid();
-  $('#feed').innerHTML=S.latest.length?S.latest.map(c=>tile(c,docName(c.doctor_id))).join(''):'<div class="empty">لم تُنشر حالات بعد.</div>';
+  $('#feed').innerHTML=S.latest.length?S.latest.map(c=>tile(c,docName(c.doctor_id))).join(''):emptyBox('لم تُنشر حالات بعد.');
   bindTiles($('#feed'),S.latest);
   $('#tips').innerHTML=S.tips.map(t=>`<div class="tip"><h3>${esc(t.title)}</h3><p>${esc(t.body)}</p></div>`).join('');
   if(!S.tips.length)$('#tipsSec').hidden=true;
@@ -442,7 +535,7 @@ function grid(){
   const list=S.docs.filter(d=>(!f.area||d.area===f.area)&&(!f.spec||d.spec===f.spec)&&(!f.open||openNow(d))&&(!q||norm([d.name,d.clinic,d.spec,d.area,(d.services||[]).join(' '),d.bio].join(' ')).includes(q)));
   list.sort((a,b)=>f.sort==='cases'?b.case_count-a.case_count:f.sort==='new'?String(b.created_at).localeCompare(a.created_at):(b.featured-a.featured)||(b.verified-a.verified)||(b.case_count-a.case_count));
   $('#cnt').textContent=`${list.length} من ${S.docs.length} طبيب${f.open?' · المفتوح الآن فقط':''}`;
-  g.innerHTML=list.length?list.map(d=>`<a class="card ${d.featured?'feat':''}" href="#/d/${encodeURIComponent(d.id)}">${avatar(d)}<div><b>${nm(d)}</b><span class="sub">${esc(d.spec)} · ${esc(d.area)}</span><div class="meta">${d.featured?'<span class="pill gold">مميّز</span>':''}${openPill(d)}<span class="pill">${d.case_count} حالة</span>${d.years?`<span class="pill">${+d.years} سنة خبرة</span>`:''}</div></div></a>`).join(''):`<div class="empty">${f.open?'لا توجد عيادة مفتوحة الآن تطابق البحث.':'لا يوجد طبيب يطابق البحث. جرّب منطقة أو اختصاصاً آخر.'}</div>`;
+  g.innerHTML=list.length?list.map(d=>`<a class="card ${d.featured?'feat':''}" href="#/d/${encodeURIComponent(d.id)}">${avatar(d)}<div><b>${nm(d)}</b><span class="sub">${esc(d.spec)} · ${esc(d.area)}</span><div class="meta">${d.featured?'<span class="pill gold">مميّز</span>':''}${openPill(d)}<span class="pill">${d.case_count} حالة</span>${d.years?`<span class="pill">${+d.years} سنة خبرة</span>`:''}</div></div></a>`).join(''):emptyBox(f.open?'لا توجد عيادة مفتوحة الآن تطابق البحث.':'لا يوجد طبيب يطابق البحث. جرّب منطقة أو اختصاصاً آخر.');
 }
 const tile=(c,d,extra='')=>`<button class="case" data-c="${esc(c.id)}"><div class="ph"><img src="${safeImg(c.after_url)}" alt="" loading="lazy"><span class="tag">${esc(c.cat)}</span>${c.hidden?'<span class="hid">مخفية</span>':''}</div><div class="tx"><b>${esc(c.title)}</b><span>${d?esc(d.name):''}${extra}</span></div></button>`;
 function bindTiles(root,list,d){root.querySelectorAll('.case').forEach(b=>b.onclick=()=>openCase(list.find(c=>c.id===b.dataset.c),d))}
@@ -483,28 +576,31 @@ async function pageMap(){
 }
 
 async function pageDoctor(id){
-  setApp(wrapMsg('جارٍ التحميل…'));
+  setApp(`<section class="dhead band"><div class="wrap" style="display:flex;gap:18px;align-items:center"><div class="sk" style="width:96px;height:96px;border-radius:50%;opacity:.3"></div><div style="flex:1;display:grid;gap:10px"><div class="sk" style="height:26px;width:60%;opacity:.3"></div><div class="sk" style="height:16px;width:40%;opacity:.3"></div></div></div></section>`);
   const d=await API.getDoctor(id);
   if(!d)return setApp(wrapMsg('لم نجد صفحة هذا الطبيب. <a href="#/">العودة للدليل</a>'));
   const cases=await API.casesOf(id,true);
   if(S.me?.id!==id)API.logClick(id,'view');
   const pub=d.status==='approved',km=S.myLoc&&hasLoc(d)?haversine(S.myLoc,[+d.lat,+d.lng]):null;
-  setApp(`<section class="dhead band"><div class="zig"></div><div class="wrap"><a class="back" href="#/">→ كل الأطباء</a>
+  setApp(`<section class="dhead band" style="padding-bottom:64px">${SCENE}<div class="wrap dgrid"><div><a class="back" href="#/">${IX.home} → كل الأطباء</a>
     ${pub?'':`<div class="banner ${d.status}">هذه الصفحة ${STATUS[d.status]} ولا تظهر للناس.</div>`}
     <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">${avatar(d,'lg')}
-    <div class="who"><h1>${nm(d)}</h1><p>${esc(d.spec)} · ${esc(d.area)}${d.clinic?' · '+esc(d.clinic):''}</p>
-    <div class="meta" style="color:inherit">${openPill(d)}<span class="pill gold">${cases.length} حالة</span>${d.years?`<span class="pill" style="background:rgba(255,255,255,.12)">${+d.years} سنة خبرة</span>`:''}${km!=null?`<span class="pill" style="background:rgba(255,255,255,.12)">يبعد ${kmTxt(km)}</span>`:''}</div></div></div>
-    <div class="acts">${d.whatsapp||d.phone?`<a class="btn wa" id="wa" href="${waLink(d)}" target="_blank" rel="noopener">احجز عبر واتساب</a>`:''}
-    ${d.phone?`<a class="btn ghost" id="call" href="${telLink(d)}">اتصال <span dir="ltr">${esc(d.phone)}</span></a>`:''}${hasLoc(d)?`<a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&destination=${+d.lat},${+d.lng}" target="_blank" rel="noopener">${IC.pin}الاتجاهات</a>`:''}<button class="btn ghost" id="share">نسخ رابط الصفحة</button></div></div></section>
-  <nav class="tabs scroll"><button data-t="cases">الحالات</button><button data-t="about">عن الطبيب</button><button data-t="hours">المواعيد والموقع</button></nav>
+    <div class="who"><h1>${nm(d)}</h1><p>${[d.spec,d.area,d.clinic].filter(Boolean).map(esc).join(' - ')}</p>
+    <div class="meta" style="color:inherit">${openPill(d)}<span class="pill gold">✓ ${cases.length} حالة</span>${d.years?`<span class="pill" style="background:rgba(255,255,255,.08)">${+d.years} سنة خبرة</span>`:''}${km!=null?`<span class="pill" style="background:rgba(255,255,255,.08)">يبعد ${kmTxt(km)}</span>`:''}</div></div></div>
+    <div class="acts" style="margin-top:22px">${d.whatsapp||d.phone?`<a class="btn wa" id="wa" href="${waLink(d)}" target="_blank" rel="noopener">${IX.wa}احجز عبر واتساب</a>`:''}
+    ${d.phone?`<a class="btn ghost" id="call" href="${telLink(d)}">${IX.call}اتصال <span dir="ltr">${esc(d.phone)}</span></a>`:''}${hasLoc(d)?`<a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&destination=${+d.lat},${+d.lng}" target="_blank" rel="noopener">${IX.pin}الاتجاهات</a>`:''}<button class="btn ghost" id="share">${IX.link}نسخ رابط الصفحة</button></div></div>
+    <div class="dart">${tooth3D()}</div></div></section>
+  <nav class="tabs curve scroll"><button data-t="cases">${IX.bag}الحالات</button><button data-t="about">${IX.user}عن الطبيب</button><button data-t="hours">${IX.pin}المواعيد والموقع</button></nav>
   <section class="band"><div class="wrap" id="tabc"></div></section>`);
+  if(d.whatsapp||d.phone)setDact(`${d.whatsapp||d.phone?`<a class="btn wa" data-k="wa" href="${waLink(d)}" target="_blank" rel="noopener">${IX.wa}احجز عبر واتساب</a>`:''}${d.phone?`<a class="btn dk" data-k="call" href="${telLink(d)}">${IX.call}اتصال</a>`:`<button class="btn" id="share2">مشاركة</button>`}`);
+  $$('#dact [data-k]').forEach(a=>a.onclick=()=>API.logClick(id,a.dataset.k));$('#share2')&&($('#share2').onclick=()=>copy(pageUrl(id)));
   $('#wa')&&($('#wa').onclick=()=>API.logClick(id,'wa'));$('#call')&&($('#call').onclick=()=>API.logClick(id,'call'));
   $('#share').onclick=()=>copy(pageUrl(id));
   let tab='cases',cat='';
   const paint=()=>{
     killMaps();$$('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===tab));const c=$('#tabc');
     if(tab==='cases'){const cats=[...new Set(cases.map(x=>x.cat))],list=cases.filter(x=>!cat||x.cat===cat);
-      c.innerHTML=!cases.length?'<div class="empty">لم ينشر الطبيب حالات بعد.</div>':`${cats.length>1?`<div class="tagsr" style="margin-bottom:14px"><button class="chip ${cat?'':'on'}" data-k="">الكل (${cases.length})</button>${cats.map(k=>`<button class="chip ${k===cat?'on':''}" data-k="${esc(k)}">${esc(k)}</button>`).join('')}</div>`:''}<div class="feed">${list.map(x=>tile(x,d)).join('')}</div>`;
+      c.innerHTML=!cases.length?emptyBox('لم ينشر الطبيب حالات بعد.'):`${cats.length>1?`<div class="tagsr" style="margin-bottom:14px"><button class="chip ${cat?'':'on'}" data-k="">الكل (${cases.length})</button>${cats.map(k=>`<button class="chip ${k===cat?'on':''}" data-k="${esc(k)}">${esc(k)}</button>`).join('')}</div>`:''}<div class="feed">${list.map(x=>tile(x,d)).join('')}</div>`;
       c.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{cat=b.dataset.k;paint()});bindTiles(c,cases,d);
     }else if(tab==='about'){c.innerHTML=`<div class="info"><div class="box"><h3>نبذة</h3><p>${esc(d.bio)||'—'}</p></div><div class="box"><h3>الخدمات</h3><div class="tagsr">${(d.services||[]).map(s=>`<span class="pill">${esc(s)}</span>`).join('')||'—'}</div></div><div class="box"><h3>المؤهل والخبرة</h3><p>${esc(d.edu)||'—'}</p>${d.years?`<p style="margin-top:6px;color:var(--muted)">${+d.years} سنة في الممارسة</p>`:''}</div></div>`}
     else{c.innerHTML=`<div class="info"><div class="box"><h3>أيام الدوام</h3><div class="days">${DAYS.map((n,i)=>`<span class="${(d.days||[]).includes(i)?'on':''}">${n}</span>`).join('')}</div><p style="margin-top:12px">${d.open_from?`من ${fmt(d.open_from)} إلى ${fmt(d.open_to)}`:'لم تُحدَّد الساعات'}</p></div>
@@ -644,7 +740,7 @@ async function dashCases(d){
       prog(100,'تم النشر ✓');e.target.reset();['before','after'].forEach(k=>{files[k]=null;const z=$('#dz-'+k);z.querySelectorAll('img,.rm').forEach(n=>n.remove());z.querySelector('.ph').hidden=false});
       S.at=0;toast('نُشرت الحالة');mine();setTimeout(()=>prog(null),1500)}catch(er){prog(null);toast(errMsg(er))}finally{b.disabled=false}};
   const mine=async()=>{const cs=await API.casesOf(S.me.id,false);const m=$('#mine');if(!m)return;
-    m.innerHTML=cs.length?cs.map(c=>`<div class="it"><img class="th" src="${safeImg(c.after_url)}" alt=""><div class="mid"><b>${esc(c.title)}</b><span>${esc(c.cat)} · ${ago(c.created_at)}${c.hidden?' · <b style="display:inline;color:var(--danger)">أخفتها الإدارة</b>':''}</span></div><div class="ops"><button class="btn sm del" data-x="${esc(c.id)}">حذف</button></div></div>`).join(''):'<div class="empty">لم تنشر حالات بعد.</div>';
+    m.innerHTML=cs.length?cs.map(c=>`<div class="it"><img class="th" src="${safeImg(c.after_url)}" alt=""><div class="mid"><b>${esc(c.title)}</b><span>${esc(c.cat)} · ${ago(c.created_at)}${c.hidden?' · <b style="display:inline;color:var(--danger)">أخفتها الإدارة</b>':''}</span></div><div class="ops"><button class="btn sm del" data-x="${esc(c.id)}">حذف</button></div></div>`).join(''):emptyBox('لم تنشر حالات بعد.');
     m.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>confirm2(b,async()=>{await API.deleteCase(cs.find(c=>c.id===b.dataset.x));S.at=0;toast('حُذفت الحالة');mine()}))};
   mine();
 }

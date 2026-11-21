@@ -2,22 +2,23 @@
   "id": "./",
   "name": "بسمة ذي قار — دليل أطباء الأسنان",
   "short_name": "بسمة",
-  "description": "دليل أطباء الأسنان في محافظة ذي قار: حالات قبل وبعد وحجز عبر واتساب",
+  "description": "دليل أطباء الأسنان في محافظة ذي قار: خارطة، حالات قبل وبعد، وحجز عبر واتساب",
   "lang": "ar",
   "dir": "rtl",
   "start_url": "./?source=pwa",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#ffffff",
-  "theme_color": "#063b3a",
+  "background_color": "#0B2C3D",
+  "theme_color": "#0B2C3D",
   "categories": ["medical", "health"],
   "icons": [
     {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
     {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
-    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+    {"src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
   ],
   "shortcuts": [
+    {"name": "خارطة الأطباء", "url": "./#/map", "icons": [{"src": "icon-192.png", "sizes": "192x192"}]},
     {"name": "لوحة الطبيب", "url": "./#/dash", "icons": [{"src": "icon-192.png", "sizes": "192x192"}]}
   ]
 }
