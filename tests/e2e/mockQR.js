@@ -1,0 +1,1 @@
+window.QRCode=function(el,o){const c=document.createElement('canvas');c.width=o.width;c.height=o.height;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.fillStyle=o.colorDark;for(let i=0;i<25;i++)for(let j=0;j<25;j++)if((i*7+j*13+i*j)%3===0)x.fillRect(i*c.width/25,j*c.height/25,c.width/25,c.height/25);el.append(c)};window.QRCode.CorrectLevel={M:0};

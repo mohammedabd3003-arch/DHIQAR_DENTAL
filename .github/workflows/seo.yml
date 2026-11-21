@@ -1,0 +1,29 @@
+# يولّد صفحات SEO الثابتة يومياً من بيانات Supabase العامة ويرفعها للمستودع
+# الإعداد: Settings > Secrets and variables > Actions > New repository secret:
+#   SUPABASE_URL, SUPABASE_ANON_KEY (المفتاح العام فقط)، SITE_URL (مثل https://user.github.io/DHIQAR_DENTAL)
+name: Build SEO pages
+on:
+  schedule: [{ cron: '0 23 * * *' }]   # 2 فجراً بتوقيت بغداد
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: { group: seo, cancel-in-progress: true }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - name: Generate
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: node scripts/build-seo.mjs
+      - name: Commit if changed
+        run: |
+          git config user.name "basma-seo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add doctor spec area sitemap.xml robots.txt
+          git diff --cached --quiet || (git commit -m "chore(seo): تحديث صفحات الفهرسة" && git push)

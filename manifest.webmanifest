@@ -9,16 +9,62 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#0B2C3D",
-  "theme_color": "#0B2C3D",
-  "categories": ["medical", "health"],
+  "background_color": "#06141E",
+  "theme_color": "#06141E",
+  "categories": [
+    "medical",
+    "health"
+  ],
   "icons": [
-    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
-    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
-    {"src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ],
   "shortcuts": [
-    {"name": "خارطة الأطباء", "url": "./#/map", "icons": [{"src": "icon-192.png", "sizes": "192x192"}]},
-    {"name": "لوحة الطبيب", "url": "./#/dash", "icons": [{"src": "icon-192.png", "sizes": "192x192"}]}
+    {
+      "name": "خارطة الأطباء",
+      "url": "./#/map",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "حجوزاتي",
+      "url": "./#/my",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "لوحة الطبيب",
+      "url": "./#/dash",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
   ]
 }

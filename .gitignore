@@ -1,0 +1,13 @@
+# أسرار وإعدادات محلية
+.env
+.env.*
+!.env.example
+# config.js يحوي المفتاح العام فقط ويجب رفعه لـ GitHub Pages؛ لا تضع فيه مفتاح service_role أبداً
+node_modules/
+tests/e2e/shots/
+tests/e2e/results.json
+*.zip
+*.log
+.DS_Store
+Thumbs.db
+supabase/.temp/
