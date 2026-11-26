@@ -1,4 +1,5 @@
 // أدوات عامة: DOM، النصوص، الوقت بتوقيت بغداد، الهاتف، الرسائل
+import { publicBase, nativeShare } from './native.js';
 export const $ = s => document.querySelector(s);
 export const $$ = s => [...document.querySelectorAll(s)];
 export const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -34,7 +35,7 @@ export const ago = iso => { const s = (Date.now() - new Date(iso)) / 1000; if (s
 export const normPhone = p => { let d = String(p || '').replace(/[٠-٩]/g, c => '٠١٢٣٤٥٦٧٨٩'.indexOf(c)).replace(/\D/g, ''); if (/^9647\d{9}$/.test(d)) d = '0' + d.slice(3); else if (/^7\d{9}$/.test(d)) d = '0' + d; return d; };
 export const validPhone = p => /^07\d{9}$/.test(normPhone(p));
 const intl = p => { let n = String(p || '').replace(/\D/g, ''); if (n.startsWith('00')) n = n.slice(2); if (n.startsWith('0')) n = '964' + n.slice(1); return n; };
-export const waLink = (d, msg = 'مرحباً دكتور، أتواصل معك عن طريق دليل بسمة ذي قار.') => `https://wa.me/${intl(d.whatsapp || d.phone)}?text=${encodeURIComponent(msg)}`;
+export const waLink = (d, msg = 'مرحباً دكتور، أتواصل معك عن طريق تطبيق دكتور أور.') => `https://wa.me/${intl(d.whatsapp || d.phone)}?text=${encodeURIComponent(msg)}`;
 export const telLink = d => `tel:${String(d.phone || '').replace(/[^\d+]/g, '')}`;
 
 /* ---------- الجغرافيا ---------- */
@@ -46,7 +47,7 @@ export const kmTxt = k => k < 1 ? `${Math.round(k * 1000)} م` : `${k < 10 ? k.t
 export const isUUID = s => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(s));
 export const docKey = d => d.slug || d.id;
 export const docHref = d => '#/d/' + encodeURIComponent(docKey(d));
-export const baseUrl = () => location.origin + location.pathname.replace(/index\.html$/, '');
+export const baseUrl = () => publicBase();
 export const pageUrl = d => baseUrl() + docHref(d);
 export const uidGen = () => (crypto.randomUUID ? crypto.randomUUID() : 'id-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10));
 
@@ -62,7 +63,7 @@ export const sessionKey = () => { let k = store.get('basma_sk'); if (!k) { k = u
 export function toast(t, ms = 3200) { const e = $('#toast'); e.textContent = t; e.classList.add('on'); clearTimeout(e._t); e._t = setTimeout(() => e.classList.remove('on'), ms); }
 export function toastAction(t, label, fn) { const e = $('#toast'); e.innerHTML = `${esc(t)} <button class="btn sm pri" style="margin-inline-start:10px">${esc(label)}</button>`; e.style.pointerEvents = 'auto'; e.classList.add('on'); e.querySelector('button').onclick = fn; }
 export async function copy(t) { try { await navigator.clipboard.writeText(t); toast('تم النسخ'); } catch { toast(t); } }
-export async function share(title, url) { if (navigator.share) { try { await navigator.share({ title, url }); return; } catch { return; } } copy(url); }
+export async function share(title, url) { if (await nativeShare(title, url)) return; if (navigator.share) { try { await navigator.share({ title, url }); return; } catch { return; } } copy(url); }
 export const setApp = h => { $('#app').innerHTML = h; };
 export const wrapMsg = t => `<div class="band"><div class="wrap"><div class="msg">${t}</div></div></div>`;
 export function setDact(h) { const e = $('#dact'); e.innerHTML = h; e.hidden = !h; document.body.classList.toggle('has-dact', !!h); }
@@ -75,7 +76,7 @@ export function closeModal() { const m = $('#modal'); if (!m.classList.contains(
 export function confirm2(b, fn) { if (b.dataset.sure !== '1') { const t = b.textContent; b.dataset.sure = '1'; b.textContent = 'تأكيد؟'; setTimeout(() => { b.dataset.sure = ''; b.textContent = t; }, 4000); return; } b.disabled = true; fn().catch(er => { toast(errMsg(er)); b.disabled = false; }); }
 export const skel = (n, h = 98) => `<div class="sk" style="height:${h}px"></div>`.repeat(n);
 export function bars(rows) { const mx = Math.max(1, ...rows.map(r => r[1])); return `<div class="bars">${rows.map(([l, v]) => `<div class="brow"><span>${esc(l)}</span><span><i style="width:${Math.max(2, v / mx * 100)}%"></i></span><span class="num">${v}</span></div>`).join('')}</div>`; }
-export function setMeta(title, desc) { document.title = title ? `${title} — بسمة ذي قار` : 'بسمة ذي قار — دليل أطباء الأسنان'; const m = document.querySelector('meta[name=description]'); if (m && desc) m.setAttribute('content', desc); }
+export function setMeta(title, desc) { document.title = title ? `${title} — دكتور أور` : 'دكتور أور — دليل أطباء الأسنان'; const m = document.querySelector('meta[name=description]'); if (m && desc) m.setAttribute('content', desc); }
 
 /* ---------- رسائل الأخطاء ---------- */
 export function errMsg(e) {

@@ -1,10 +1,10 @@
-// بسمة ذي قار — Service Worker
+// دكتور أور — Service Worker
 // الواجهة: شبكة أولاً مع نسخة احتياطية للعمل دون اتصال. الملفات الثابتة: من الذاكرة مع تحديث بالخلفية.
 // لا يُخزَّن أي طلب لخوادم Supabase أو الخرائط: بيانات الحسابات لا تبقى على الجهاز.
-const VERSION = '5.0.0';
+const VERSION = '5.1.0';
 const CACHE = 'basma-' + VERSION;
-const SHELL = ['./', './index.html', './offline.html', './css/app.css?v=5.0.0', './js/app.js?v=5.0.0', './js/theme-init.js',
-  './js/core/util.js', './js/core/art.js', './js/core/state.js', './js/core/maps.js', './js/core/media.js', './js/components/doctor.js',
+const SHELL = ['./', './index.html', './offline.html', './css/app.css?v=5.1.0', './js/app.js?v=5.1.0', './js/theme-init.js',
+  './js/core/util.js', './js/core/native.js', './js/core/art.js', './js/core/state.js', './js/core/maps.js', './js/core/media.js', './js/components/doctor.js',
   './js/services/live.js', './js/services/demo.js', './js/pages/home.js', './js/pages/map.js', './js/pages/doctor.js', './js/pages/booking.js',
   './js/pages/auth.js', './js/pages/dash.js', './js/pages/admin.js', './manifest.webmanifest', './icon-192.png', './icon-512.png', './favicon.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL))); });

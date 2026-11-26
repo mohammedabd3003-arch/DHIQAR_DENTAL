@@ -11,3 +11,15 @@ tests/e2e/results.json
 .DS_Store
 Thumbs.db
 supabase/.temp/
+
+# تطبيق الموبايل: ناتج البناء ومخبأ المكتبات (مجلدا android/ و ios/ يُرفعان)
+www/
+.vendor-cache/
+android/app/build/
+android/.gradle/
+android/local.properties
+ios/App/Pods/
+ios/App/build/
+*.jks
+*.keystore
+keystore.properties

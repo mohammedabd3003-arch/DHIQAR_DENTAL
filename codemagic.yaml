@@ -1,0 +1,52 @@
+# بناء تطبيق iOS في السحابة (أجهزة Mac لدى Codemagic) ورفعه إلى TestFlight — بلا حاجة لجهاز Mac.
+# قبل أول تشغيل (مرة واحدة، من المتصفح):
+#  1) Apple Developer: أنشئ App ID بنفس appId الموجود في capacitor.config.json
+#  2) App Store Connect: أنشئ التطبيق بنفس Bundle ID، وأنشئ مفتاح API (Users and Access → Integrations)
+#  3) Codemagic: Team settings → Integrations → Developer Portal → أضف المفتاح باسم BASMA_ASC_KEY
+#  4) Codemagic: Environment variables → مجموعة باسم basma فيها APP_STORE_APP_ID = الرقم التعريفي للتطبيق (Apple ID في App Store Connect)
+workflows:
+  ios-testflight:
+    name: iOS → TestFlight
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: BASMA_ASC_KEY
+    environment:
+      groups:
+        - basma
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: iq.drur.app
+      node: 20
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: تثبيت الحزم
+        script: npm install
+      - name: بناء نسخة التطبيق
+        script: npm run build:app
+      - name: إنشاء مشروع iOS إن لم يكن موجوداً
+        script: |
+          if [ ! -d ios ]; then npx cap add ios; fi
+          npm run app:setup
+      - name: مزامنة
+        script: npx cap sync ios
+      - name: ملفات التوقيع
+        script: xcode-project use-profiles
+      - name: رقم البناء
+        script: |
+          LATEST=$(app-store-connect get-latest-testflight-build-number "$APP_STORE_APP_ID" || echo 0)
+          cd ios/App && agvtool new-version -all $((LATEST + 1))
+      - name: بناء IPA
+        script: |
+          if [ -d ios/App/App.xcworkspace ]; then
+            xcode-project build-ipa --workspace ios/App/App.xcworkspace --scheme App
+          else
+            xcode-project build-ipa --project ios/App/App.xcodeproj --scheme App
+          fi
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true

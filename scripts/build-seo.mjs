@@ -30,18 +30,18 @@ async function load() {
 const page = ({ title, desc, canonical, body, jsonld, image }) => `<!DOCTYPE html>
 <html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><link rel="canonical" href="${esc(canonical)}">
-<meta property="og:type" content="website"><meta property="og:locale" content="ar_IQ"><meta property="og:site_name" content="بسمة ذي قار">
+<meta property="og:type" content="website"><meta property="og:locale" content="ar_IQ"><meta property="og:site_name" content="دكتور أور">
 <meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${esc(canonical)}"><meta property="og:image" content="${esc(image || SITE + '/icon-512.png')}">
 <meta name="twitter:card" content="summary"><meta name="theme-color" content="#06141E"><link rel="icon" href="${SITE}/favicon.png">
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld).replace(/</g, '\\u003c')}</script>` : ''}
 <style>body{margin:0;background:#06141E;color:#F2ECDF;font:17px/1.8 "IBM Plex Sans Arabic",Tahoma,sans-serif}main{max-width:880px;margin:0 auto;padding:28px 18px 60px}a{color:#E9C77D}h1,h2{font-family:"Readex Pro",Tahoma,sans-serif;line-height:1.2}h1{font-size:32px;margin:10px 0}h2{font-size:21px;color:#F3D892;margin-top:28px}.btn{display:inline-block;background:linear-gradient(180deg,#F6DC9A,#B9893A);color:#1C1305;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;margin:6px 0 6px 8px}.btn.o{background:none;border:1px solid #D6AE5C;color:#F2ECDF}.card{display:block;border:1px solid rgba(214,174,92,.3);border-radius:16px;padding:14px 16px;margin:10px 0;text-decoration:none;color:inherit}.muted{color:#9FB2BC}.pill{display:inline-block;border:1px solid rgba(214,174,92,.4);border-radius:999px;padding:2px 12px;margin:2px;font-size:14px}img.av{width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid #D6AE5C}nav{font-size:14px}</style></head>
-<body><main><nav><a href="${SITE}/">بسمة ذي قار</a> › ${body.crumb || ''}</nav>${body.html}
-<p class="muted" style="margin-top:40px;font-size:14px">بسمة ذي قار — دليل أطباء الأسنان في محافظة ذي قار. <a href="${SITE}/privacy.html">الخصوصية والشروط</a></p></main></body></html>`;
+<body><main><nav><a href="${SITE}/">دكتور أور</a> › ${body.crumb || ''}</nav>${body.html}
+<p class="muted" style="margin-top:40px;font-size:14px">دكتور أور — دليل أطباء الأسنان في محافظة ذي قار. <a href="${SITE}/privacy.html">الخصوصية والشروط</a></p></main></body></html>`;
 
 function doctorPage(d, r, cases) {
   const key = d.slug || d.id, url = `${SITE}/doctor/${encodeURIComponent(key)}/`, app = `${SITE}/#/d/${encodeURIComponent(key)}`;
   const name = `${d.title || 'د.'} ${d.name}`;
-  const title = `${name} — ${d.spec} في ${d.area} | بسمة ذي قار`;
+  const title = `${name} — ${d.spec} في ${d.area} | دكتور أور`;
   const desc = `${name}، ${d.spec} في ${d.area}${d.clinic ? '، ' + d.clinic : ''}.${d.years ? ` خبرة ${d.years} سنة.` : ''} أوقات الدوام والعنوان والحالات قبل وبعد${d.booking_enabled ? ' والحجز المباشر' : ''}.`;
   const ld = { '@context': 'https://schema.org', '@type': 'Dentist', name, url, medicalSpecialty: 'Dentistry',
     address: { '@type': 'PostalAddress', addressLocality: d.area, addressRegion: 'ذي قار', addressCountry: 'IQ', ...(d.address ? { streetAddress: d.address } : {}) } };
@@ -64,7 +64,7 @@ function doctorPage(d, r, cases) {
   return { path: `doctor/${key}`, url, lastmod: d.updated_at, html: page({ title, desc, canonical: url, image: ld.image, jsonld: ld, body: { crumb: `<a href="${SITE}/spec/${encodeURIComponent(seg(d.spec))}/">${esc(d.spec)}</a>`, html } }) };
 }
 function listPage(kind, label, docs, R) {
-  const url = `${SITE}/${kind}/${encodeURIComponent(seg(label))}/`, title = kind === 'spec' ? `أطباء ${label} في ذي قار | بسمة ذي قار` : `أطباء الأسنان في ${label} | بسمة ذي قار`;
+  const url = `${SITE}/${kind}/${encodeURIComponent(seg(label))}/`, title = kind === 'spec' ? `أطباء ${label} في ذي قار | دكتور أور` : `أطباء الأسنان في ${label} | دكتور أور`;
   const desc = `${docs.length} طبيب ${kind === 'spec' ? label + ' في محافظة ذي قار' : 'أسنان في ' + label}: العيادات وأوقات الدوام والحالات والحجز.`;
   const html = `<h1>${esc(kind === 'spec' ? `أطباء ${label} في ذي قار` : `أطباء الأسنان في ${label}`)}</h1><p class="muted">${docs.length} طبيب مسجّل ومعتمد في الدليل.</p>
   ${docs.map(d => { const r = R[d.id]; return `<a class="card" href="${SITE}/doctor/${encodeURIComponent(d.slug || d.id)}/"><b>${esc(d.title || 'د.')} ${esc(d.name)}${d.verified ? ' ✓' : ''}</b><br><span class="muted">${esc(d.spec)} · ${esc(d.area)}${d.clinic ? ' · ' + esc(d.clinic) : ''}${r && r.review_count ? ` · ★ ${(+r.avg_rating).toFixed(1)}` : ''}</span></a>`; }).join('')}

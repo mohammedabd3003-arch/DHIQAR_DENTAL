@@ -1,8 +1,8 @@
 {
   "name": "basma-dhiqar",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "private": true,
-  "description": "بسمة ذي قار — منصة أطباء الأسنان (بدون أداة بناء: ES Modules + Supabase)",
+  "description": "دكتور أور — منصة أطباء الأسنان (بدون أداة بناء: ES Modules + Supabase)",
   "type": "module",
   "scripts": {
     "serve": "python3 -m http.server 8765",
@@ -10,6 +10,33 @@
     "seo": "node scripts/build-seo.mjs",
     "seo:test": "SITE_URL=https://example.github.io/REPO MOCK_FILE=tests/seo/fixture.json OUT_DIR=/tmp/seo node scripts/build-seo.mjs",
     "test:db": "bash supabase/tests/run.sh",
-    "test:e2e": "cd tests/e2e && python3 e2e_demo.py"
+    "test:e2e": "cd tests/e2e && python3 e2e_demo.py",
+    "build:app": "node scripts/build-app.mjs",
+    "app:setup": "node scripts/native-setup.mjs",
+    "android": "npm run build:app && npx cap sync android && npx cap open android",
+    "android:aab": "npm run build:app && npx cap sync android && cd android && gradlew bundleRelease",
+    "android:apk": "npm run build:app && npx cap sync android && cd android && gradlew assembleRelease",
+    "ios:sync": "npm run build:app && npx cap sync ios"
+  },
+  "basma": {
+    "publicSiteUrl": "https://mohammedabd3003-arch.github.io/DHIQAR_DENTAL/",
+    "supabaseJs": "2"
+  },
+  "dependencies": {
+    "@capacitor/core": "^7.0.0",
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/ios": "^7.0.0",
+    "@capacitor/app": "^7.0.0",
+    "@capacitor/app-launcher": "^7.0.0",
+    "@capacitor/browser": "^7.0.0",
+    "@capacitor/filesystem": "^7.0.0",
+    "@capacitor/keyboard": "^7.0.0",
+    "@capacitor/share": "^7.0.0",
+    "@capacitor/splash-screen": "^7.0.0",
+    "@capacitor/status-bar": "^7.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.0.0",
+    "@capacitor/assets": "^3.0.5"
   }
 }

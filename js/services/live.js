@@ -1,8 +1,9 @@
 // خدمة Supabase الحقيقية — كل الصلاحيات تُفرض في قاعدة البيانات (RLS + دوال)، والواجهة تعرض فقط
 import { loadScript } from '../core/maps.js';
 import { sessionKey, isUUID } from '../core/util.js';
+import { isNative, publicBase, LIB } from '../core/native.js';
 
-const SB_URLS = ['https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js', 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'];
+const SB_URLS = LIB.supabase;
 const PUB = 'id,slug,title,name,spec,area,clinic,address,map_url,phone,whatsapp,days,open_from,open_to,years,edu,bio,services,photo_url,status,verified,featured,booking_enabled,slot_minutes,booking_note,created_at,updated_at,lat,lng,cases(count)';
 const chk = r => { if (r.error) throw r.error; return r.data; };
 const withCount = rows => (rows || []).map(d => ({ ...d, case_count: Array.isArray(d.cases) ? (d.cases[0]?.count || 0) : (d.case_count || 0) }));
@@ -10,7 +11,8 @@ const since = days => new Date(Date.now() - days * 864e5).toISOString();
 
 export function Live(cfg) {
   let sb, cur = null;
-  const here = () => location.origin + location.pathname;
+  // روابط البريد (التفعيل والاستعادة): داخل التطبيق تذهب لموقع الويب العام لأن localhost لا يُفتح من البريد
+  const here = () => isNative ? publicBase() : location.origin + location.pathname;
   const mediaPath = u => String(u || '').split('/storage/v1/object/public/media/')[1];
   async function withRatings(rows) {
     if (!rows.length) return rows;

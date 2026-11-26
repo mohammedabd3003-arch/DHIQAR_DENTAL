@@ -291,3 +291,8 @@ html{scroll-behavior:smooth}
 :root[data-theme=light] .hero,:root[data-theme=light] .dhead,:root[data-theme=light] .join{--ink:#F2ECDF;--muted:#9FB2BC;--line:rgba(214,174,92,.22);--soft:rgba(255,255,255,.05);--card:rgba(13,38,54,.78);color:#F2ECDF}
 :root[data-theme=light] .hero .search{background:rgba(8,28,42,.8)}
 @media(max-width:760px){header.top .swoosh{display:none}}
+
+/* ---------- داخل تطبيق الموبايل (Capacitor) فقط ---------- */
+.native{-webkit-tap-highlight-color:transparent}
+.native body{overscroll-behavior-y:none}
+.native .skip{display:none}

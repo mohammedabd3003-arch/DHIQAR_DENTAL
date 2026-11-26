@@ -5,6 +5,7 @@ import { IC, IX, IB, ZIG, emptyBox, safeImg } from '../core/art.js';
 import { avatar, nm, initial, stars } from '../components/doctor.js';
 import { compress, checkImage, checkDoc } from '../core/media.js';
 import { loadLeaflet, baseMap, docIcon, getGPS, CENTER, killMaps, loadScript } from '../core/maps.js';
+import { isNative, saveImage, LIB } from '../core/native.js';
 
 const TABS = [['home', 'الرئيسية'], ['bookings', 'المواعيد'], ['cases', 'حالاتي'], ['profile', 'ملفي'], ['verify', 'التوثيق'], ['stats', 'الإحصائيات'], ['reviews', 'التقييمات'], ['qr', 'بطاقة QR'], ['account', 'الحساب']];
 
@@ -239,18 +240,18 @@ async function reviews(d) {
 /* ---------- QR ---------- */
 async function qr(d) {
   const url = pageUrl(d);
-  $('#dc').innerHTML = `<div class="qrwrap"><div class="qrcard" id="qrcard"><div class="top"><small>بسمة ذي قار · دليل أطباء الأسنان</small><h3>${esc(d.title || 'د.')} ${esc(d.name)}</h3><p>${esc(d.spec)}${d.clinic ? ' · ' + esc(d.clinic) : ''}</p><p style="font-size:14px">${esc(d.area)}</p><div class="zz">${ZIG}</div></div>
+  $('#dc').innerHTML = `<div class="qrwrap"><div class="qrcard" id="qrcard"><div class="top"><small>دكتور أور · دليل أطباء الأسنان</small><h3>${esc(d.title || 'د.')} ${esc(d.name)}</h3><p>${esc(d.spec)}${d.clinic ? ' · ' + esc(d.clinic) : ''}</p><p style="font-size:14px">${esc(d.area)}</p><div class="zz">${ZIG}</div></div>
     <div class="code" id="qrbox"><span class="hint">جارٍ التوليد…</span></div><div class="bt"><b>امسح الكود</b>لمشاهدة حالاتي وأوقات الدوام والحجز</div></div>
     <div class="box"><h3>بطاقة العيادة</h3><p style="color:var(--muted);margin-bottom:14px">اطبعها لمكتب الاستقبال أو انشرها في حساباتك. الكود يفتح صفحتك مباشرة${d.slug ? ' برابطك المخصص' : ''}.</p>
     ${d.status !== 'approved' ? '<div class="banner pending" style="margin-bottom:14px">صفحتك قيد المراجعة، الكود سيعمل للناس بعد موافقة الإدارة.</div>' : ''}
     <div class="acts" style="margin:0"><button class="btn pri" id="qdl">${IC.up}تحميل البطاقة (PNG)</button><button class="btn" id="qpr">طباعة</button><button class="btn" id="qcp">نسخ الرابط</button><button class="btn" id="qsh">${IB.share}مشاركة</button></div>
     <p class="hint" style="margin-top:12px" dir="ltr">${esc(url)}</p></div></div>`;
-  $('#qcp').onclick = () => copy(url); $('#qpr').onclick = () => window.print(); $('#qsh').onclick = () => share(d.name, url);
+  $('#qcp').onclick = () => copy(url); $('#qpr').onclick = () => isNative ? $('#qdl').click() : window.print(); $('#qsh').onclick = () => share(d.name, url);
   let qrCanvas = null;
-  try { if (!window.QRCode) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'); const tmp = document.createElement('div'); new QRCode(tmp, { text: url, width: 600, height: 600, colorDark: '#0B2C3D', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M });
+  try { if (!window.QRCode) await loadScript(LIB.qrcode); const tmp = document.createElement('div'); new QRCode(tmp, { text: url, width: 600, height: 600, colorDark: '#0B2C3D', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M });
     qrCanvas = tmp.querySelector('canvas'); const img = new Image(); img.alt = 'رمز QR لصفحة الطبيب'; img.src = qrCanvas.toDataURL('image/png'); $('#qrbox').innerHTML = ''; $('#qrbox').append(img); }
   catch { $('#qrbox').innerHTML = '<span class="hint">تعذّر توليد الكود، تأكد من الإنترنت.</span>'; }
-  $('#qdl').onclick = async () => { if (!qrCanvas) return toast('الكود غير جاهز'); try { const a = document.createElement('a'); a.download = `basma-qr-${d.slug || 'card'}.png`; a.href = await renderCard(d, qrCanvas); document.body.append(a); a.click(); a.remove(); } catch { toast('تعذّر التحميل، استخدم الطباعة'); } };
+  $('#qdl').onclick = async () => { if (!qrCanvas) return toast('الكود غير جاهز'); try { if (isNative) return await saveImage(await renderCard(d, qrCanvas), `basma-qr-${d.slug || 'card'}.png`, 'بطاقة العيادة'); const a = document.createElement('a'); a.download = `basma-qr-${d.slug || 'card'}.png`; a.href = await renderCard(d, qrCanvas); document.body.append(a); a.click(); a.remove(); } catch { toast('تعذّر التحميل، استخدم الطباعة'); } };
 }
 async function renderCard(d, qr) {
   try { await document.fonts.ready; } catch { }
@@ -263,7 +264,7 @@ async function renderCard(d, qr) {
   if (photo) { try { const im = await new Promise((res, rej) => { const i = new Image(); i.crossOrigin = 'anonymous'; i.onload = () => res(i); i.onerror = rej; i.src = photo.replace(/&amp;/g, '&'); });
     x.save(); x.beginPath(); x.arc(W / 2, ay + 80, 80, 0, Math.PI * 2); x.closePath(); x.clip(); const s = Math.max(160 / im.width, 160 / im.height); x.drawImage(im, W / 2 - im.width * s / 2, ay + 80 - im.height * s / 2, im.width * s, im.height * s); x.restore();
     x.strokeStyle = '#C89B3C'; x.lineWidth = 6; x.beginPath(); x.arc(W / 2, ay + 80, 82, 0, Math.PI * 2); x.stroke(); ay += 190; } catch { } }
-  x.fillStyle = '#E6C77E'; x.font = `500 30px ${F}`; x.fillText('بسمة ذي قار · دليل أطباء الأسنان', W / 2, ay + 30);
+  x.fillStyle = '#E6C77E'; x.font = `500 30px ${F}`; x.fillText('دكتور أور · دليل أطباء الأسنان', W / 2, ay + 30);
   x.fillStyle = '#F4EEE2'; x.font = `700 64px ${F}`; x.fillText(`${d.title || 'د.'} ${d.name || ''}`, W / 2, ay + 120);
   x.font = `500 36px ${F}`; x.globalAlpha = .88; x.fillText([d.spec, d.clinic].filter(Boolean).join(' · '), W / 2, ay + 180); x.fillText(String(d.area || ''), W / 2, ay + 232); x.globalAlpha = 1;
   x.fillStyle = '#fff'; x.strokeStyle = '#C89B3C'; x.lineWidth = 6; const qx = W / 2 - 260, qy = 660; x.beginPath(); x.roundRect ? x.roundRect(qx, qy, 520, 520, 36) : x.rect(qx, qy, 520, 520); x.fill(); x.stroke();

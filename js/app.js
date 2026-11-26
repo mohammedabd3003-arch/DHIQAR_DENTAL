@@ -5,19 +5,20 @@ import { BI, IB, IX, emptyBox } from './core/art.js';
 import { killMaps } from './core/maps.js';
 import { Live } from './services/live.js';
 import { Demo } from './services/demo.js';
+import { isNative, initNative, statusBar } from './core/native.js';
 import { pageHome, readQuery } from './pages/home.js';
 import { pageMap } from './pages/map.js';
 import { pageDoctor } from './pages/doctor.js';
 import { pageTrack, pageMy } from './pages/booking.js';
 import { pageLogin, pageNewPass } from './pages/auth.js';
 
-export const VERSION = '5.0.0';
+export const VERSION = '5.1.0';
 const cfg = window.BASMA_CONFIG || {};
 const LIVE = !!(cfg.SUPABASE_URL && cfg.SUPABASE_ANON_KEY);
 S.api = LIVE ? Live(cfg) : Demo();
 
 /* ---------- السمة ---------- */
-function applyTheme(t) { document.documentElement.dataset.theme = t; store.set('basma_theme', t); const m = document.querySelector('meta[name=theme-color]'); m && m.setAttribute('content', t === 'light' ? '#F7F3EA' : '#06141E'); const b = $('#themeBtn'); if (b) { b.innerHTML = t === 'light' ? IB.moon : IB.sun; b.setAttribute('aria-label', t === 'light' ? 'الوضع الداكن' : 'الوضع الفاتح'); } }
+function applyTheme(t) { document.documentElement.dataset.theme = t; store.set('basma_theme', t); const m = document.querySelector('meta[name=theme-color]'); m && m.setAttribute('content', t === 'light' ? '#F7F3EA' : '#06141E'); statusBar(t); const b = $('#themeBtn'); if (b) { b.innerHTML = t === 'light' ? IB.moon : IB.sun; b.setAttribute('aria-label', t === 'light' ? 'الوضع الداكن' : 'الوضع الفاتح'); } }
 
 /* ---------- التنقل ---------- */
 function nav() {
@@ -72,7 +73,8 @@ async function route() {
 
 /* ---------- تحديث التطبيق (PWA) ---------- */
 function registerSW() {
-  if (!('serviceWorker' in navigator) || location.protocol !== 'https:') return;
+  // داخل التطبيق لا Service Worker: التحديثات تأتي من المتجر، والملفات مضمّنة أصلاً
+  if (isNative || !('serviceWorker' in navigator) || location.protocol !== 'https:') return;
   navigator.serviceWorker.register('sw.js').then(reg => {
     const prompt = w => toastAction('نسخة جديدة من التطبيق جاهزة', 'تحديث', () => w.postMessage('skipWaiting'));
     if (reg.waiting && navigator.serviceWorker.controller) prompt(reg.waiting);
@@ -84,6 +86,7 @@ function registerSW() {
 
 /* ---------- البداية ---------- */
 (async () => {
+  try { initNative({ isModalOpen: () => $('#modal').classList.contains('on'), closeModal }); } catch (e) { console.error(e); }
   applyTheme(store.get('basma_theme', 'dark'));
   $('#themeBtn').onclick = () => applyTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light');
   $('#bell').onclick = openBell;
